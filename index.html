@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101114">
+  <title>Moje recepty</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">OSOBNÁ KUCHÁRSKA KNIHA</p>
+      <h1>Moje recepty<span>.</span></h1>
+      <p class="subtitle">Čo si môžeš pripraviť z toho, čo máš doma?</p>
+    </div>
+    <button id="addRecipeBtn" class="primary add-top" type="button">＋ Pridať recept</button>
+  </header>
+
+  <main class="layout">
+    <section class="panel pantry-panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">TVOJA ŠPAJZA</p><h2>Čo máš doma?</h2></div>
+        <button id="clearIngredients" class="text-button" type="button">Vymazať výber</button>
+      </div>
+      <label class="search-wrap"><span>⌕</span><input id="ingredientSearch" type="search" placeholder="Hľadať surovinu…"></label>
+      <div id="ingredientGroups" class="ingredient-groups"></div>
+      <div class="pantry-footer"><span id="selectedCount">0 surovín vybraných</span><button id="showAllIngredients" class="text-button" type="button">Zobraziť všetky</button></div>
+    </section>
+
+    <section class="recipes-area">
+      <div class="section-heading recipes-heading">
+        <div><p class="eyebrow">INŠPIRÁCIA NA VARENIE</p><h2>Recepty</h2></div>
+        <span id="recipeCount" class="count-pill">0 receptov</span>
+      </div>
+      <div class="toolbar">
+        <div id="categoryFilters" class="filters">
+          <button class="filter active" data-category="Všetky">Všetky</button>
+          <button class="filter" data-category="Hlavné jedlo">Hlavné jedlo</button>
+          <button class="filter" data-category="Polievka">Polievka</button>
+          <button class="filter" data-category="Koláč">Koláč</button>
+        </div>
+        <select id="sortSelect" aria-label="Zoradiť recepty">
+          <option value="match">Najviac surovín mám</option>
+          <option value="missing">Najmenej chýba</option>
+          <option value="az">Abecedne A–Z</option>
+        </select>
+      </div>
+      <div id="recipeList" class="recipe-list"></div>
+      <p id="emptyState" class="empty-state" hidden>Zatiaľ tu nič nie je. Pridaj svoj prvý recept.</p>
+      <p class="storage-note">Recepty sa ukladajú v tomto prehliadači. Na inom zariadení ich môžeš preniesť cez export a import.</p>
+    </section>
+  </main>
+
+  <dialog id="recipeDialog">
+    <form id="recipeForm" method="dialog">
+      <div class="dialog-head"><div><p class="eyebrow">NOVÝ ZÁZNAM</p><h2>Pridať recept</h2></div><button type="button" id="closeDialog" class="close-btn" aria-label="Zavrieť">×</button></div>
+      <label class="field-label">Názov receptu<input id="recipeName" required maxlength="70" placeholder="Napr. Kuracie rizoto"></label>
+      <label class="field-label">Kategória<select id="recipeCategory" required><option>Hlavné jedlo</option><option>Polievka</option><option>Koláč</option></select></label>
+      <div class="field-label">Suroviny</div>
+      <label class="search-wrap"><span>⌕</span><input id="recipeIngredientSearch" type="search" placeholder="Hľadať surovinu…"></label>
+      <div id="recipeIngredientChoices" class="choice-list"></div>
+      <div class="custom-ingredient"><input id="customIngredient" placeholder="Vlastná surovina"><button type="button" id="addCustomIngredient" class="secondary">Pridať</button></div>
+      <div id="chosenIngredients" class="chosen-list"></div>
+      <div class="dialog-actions"><button type="button" id="cancelDialog" class="secondary">Zrušiť</button><button type="submit" class="primary">Uložiť recept</button></div>
+      <p id="formError" class="form-error" role="alert"></p>
+    </form>
+  </dialog>
+
+  <footer class="footer">
+    <span>MOJE RECEPTY</span>
+    <div><button id="exportBtn" class="text-button" type="button">Exportovať zálohu</button><label class="text-button import-label">Importovať zálohu<input id="importFile" type="file" accept="application/json"></label></div>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
